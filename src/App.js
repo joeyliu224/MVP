@@ -3,32 +3,23 @@ import './App.css';
 import axios from 'axios';
 //import {Draggable,Droppable} from 'react-drag-and-drop';
 import Todo from './components/Todo.js';
-import Modal from './components/Modal.js';
+import PlannerModal from './components/Modal.js';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      type: {
-        todo: {},
-        shoppingList: {},
-        laundry:{},
-        appointment:{}
-      }
-    };
-  }
+const App = () => {
+  const [click,setClick] = useState(false);
 
-
-  componentDidMount(){
-    console.log(this.state)
-    console.log('hi')
-  };
-
-  render(){
     return (
       <div className="App">
         <h1>Weekly Planner</h1>
-        <button onClick={}>+ Add +</button>
+        <button 
+          onClick={ e => {
+            e.preventDefault();
+            setClick(true);
+          }
+        }>+ Add +</button>
+        {click? (
+          <PlannerModal/>
+        ):null}
         <div>
           <table>
             <tr>
@@ -54,7 +45,7 @@ class App extends React.Component {
       </div>
     );
 
-  }
+  
   
   
 }
