@@ -22,13 +22,18 @@ const PlannerModal = (props) => {
  }
 
   let edit = null;
-  if(type === 'todo'){
+  if(type === 'todo' || type === 'shoppingList'){
     edit = <div>
             <input 
-              placeholder='add your todo here' 
+              placeholder={type === 'todo'?
+                            'add your todo here:':
+                            'things to buy:'
+                          }
               onChange={e => setContent(e.target.value)}/>
             <span onClick={addOne}>+</span>
           </div>
+  } else if(type === 'laundry') {
+    edit = <div></div>
   }
 
   return (
@@ -41,7 +46,7 @@ const PlannerModal = (props) => {
         <option>Select Tasks</option>
         <option value='todo'>Todo</option>
         <option value='shoppingList'>Shopping List</option>
-        <option value='landry'>Laundry</option>
+        <option value='laundry'>Laundry</option>
       </select>
       <select onChange={e=>{setDay(e.target.value)}}>
         <option>Select A Day</option>
@@ -57,6 +62,7 @@ const PlannerModal = (props) => {
         })}
       </ul>
       {edit}
+      <button>Submit</button>
 
 
     </Modal>
