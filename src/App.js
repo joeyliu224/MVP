@@ -1,15 +1,23 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import axios from 'axios';
-import {Draggable,Droppable} from 'react-drag-and-drop';
+//import {Draggable,Droppable} from 'react-drag-and-drop';
+import Todo from './components/Todo.js';
+import Modal from './components/Modal.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      type: {
+        todo: {},
+        shoppingList: {},
+        laundry:{},
+        appointment:{}
+      }
     };
   }
+
 
   componentDidMount(){
     console.log(this.state)
@@ -20,33 +28,22 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Weekly Planner</h1>
+        <button onClick={}>+ Add +</button>
         <div>
           <table>
             <tr>
-              <th>Monday</th>
-              <th>Tuesday</th>
-              <th>Wednesday</th>
-              <th>Thursday</th>
-              <th>Friday</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thur</th>
+              <th>Fri</th>
             </tr>
             <tr>
               <td>
-                <div>hi</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
-                <div>yo</div>
+                <Todo/>
               </td>
               <td>
-                <div>a</div>
+
               </td>
               <td></td>
               <td></td>
