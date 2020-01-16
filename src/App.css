@@ -53,3 +53,7 @@ td {
 input {
   width: 90%;
 }
+
+select {
+  margin-left: 5%;
+}
