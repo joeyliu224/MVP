@@ -3,9 +3,12 @@ const app = express();
 const port = 3000;
 const parser = require('body-parser');
 const db = require('../db/index.js');
+const path = require('path');
 
 app.use(express.static('./dist'))
+
 app.use(parser.json());
+
 
 app.get('/', (req, res) => res.send('Hello World!'));
 

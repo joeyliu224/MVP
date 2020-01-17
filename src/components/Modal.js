@@ -9,6 +9,7 @@ const PlannerModal = (props) => {
   const [list, setList] = useState([]);
   const [content,setContent] = useState('');
   const [modalIsOpen, toggleModal] = useState(true);
+  const [time,setTime] = useState('');
 
   const closeModal = (e) => {
     toggleModal(false);
@@ -24,7 +25,12 @@ const PlannerModal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props[map[day]](Object.assign(props[day],{list:list}))
+    if(type === 'todo') {
+      props[map[day]](Object.assign(props[day],{list:list}))
+    } else if (type === 'laundry') {
+      props[map[day]](Object.assign(props[day],{laundry:time}))
+    }
+    
     closeModal(e);
   }
  const addOne = () => {
@@ -43,7 +49,11 @@ const PlannerModal = (props) => {
             <span onClick={addOne}><button>✔️</button></span>
           </div>
   } else if(type === 'laundry') {
-    edit = <div></div>
+    edit = <div>
+            @<input
+              placeholder='eg: 2pm'
+              onChange={e => setTime(e.target.value)}/>
+           </div>
   }
 
   return (

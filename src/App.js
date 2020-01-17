@@ -5,13 +5,14 @@ import axios from 'axios';
 import PlannerModal from './components/Modal.js';
 
 const App = () => {
-  const [click,setClick] = useState(false);
-  const [todos,setTodos] = useState([]);
+  const [click,setClick] = useState(false)
+  const [todos,setTodos] = useState([])
   const [mon,setmon] = useState({})
   const [tue,settue] = useState({})
   const [wed,setwed] = useState({})
   const [thur,setthur] = useState({})
   const [fri,setfri] = useState({})
+  const [temp,clearTemp] = useState({})
   
 
 
@@ -30,7 +31,18 @@ const App = () => {
         </label>
     )
     }):null}
-  </div>)    
+  </div>)
+  let taskLaundry = (day) => (
+    <div className='laundry'>
+      {day.laundry !== undefined ? 
+        <div>
+          <img src=''/>
+          <div>@{day.laundry}</div>
+        </div>
+        :null
+      }
+    </div>
+  )    
 
     
   
@@ -68,15 +80,19 @@ const App = () => {
             <tr>
               <td>
                 {taskTodo(days[0])}
+                {taskLaundry(days[0])}
               </td>
               <td>
                 {taskTodo(days[1])}
+                {taskLaundry(days[1])}
               </td>
               <td>
                 {taskTodo(days[2])}
+                {taskLaundry(days[2])}
               </td>
               <td>
                 {taskTodo(days[3])}
+                {taskLaundry(days[3])}
               </td>
               <td>
                 {taskTodo(days[4])}
