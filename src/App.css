@@ -28,7 +28,7 @@ h1 {
   margin-top: 15px;
   margin-bottom: 20px;
   font-weight: lighter;
-  font-size:60px;
+  font-size:70px;
 }
 
 table {
@@ -45,11 +45,11 @@ table,th,td {
 /* tr:hover {background-color: #f5f5f5;} */
 th {
   background-color: rgb(165, 223, 247);
-  color: white;
+  color: rgb(37, 33, 33);
   position: sticky;
   top: 0;
   text-align: center;
-  font-size: 24px;
+  font-size: 36px;
 }
 td {
   vertical-align: top;
@@ -150,7 +150,7 @@ div.todos {
 
 .delete {
   margin-left: 15px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: lighter;
   color: rgb(73, 73, 83);
   border: solid 0.5px white;
@@ -204,6 +204,9 @@ button {
   font-weight: lighter;
   text-align: center;
   margin-bottom: 8px;
+}
+.add {
+  font-size: 36px;
 }
 
 button:hover {background-color: #e7e7e7;}
