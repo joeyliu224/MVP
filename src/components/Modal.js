@@ -50,6 +50,7 @@ const PlannerModal = (props) => {
           </div>
   } else if(type === 'laundry') {
     edit = <div>
+           Time:
             @<input
               placeholder='eg: 2pm'
               onChange={e => setTime(e.target.value)}/>

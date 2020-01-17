@@ -134,3 +134,9 @@ div.todos {
   transform: rotate(45deg);
 }
 
+.delete {
+  font-size: 10px;
+  font-weight: lighter;
+  color: rgb(73, 73, 83);
+  border: solid 0.5px white;
+}

@@ -44,7 +44,10 @@ const App = () => {
     </div>
   )    
 
+  const handleDelete = (e) => {
+    console.log(e.target.name)
     
+  }
   
 
     return (
@@ -71,11 +74,11 @@ const App = () => {
         <div>
           <table>
             <tr>
-              <th>Mon</th>
-              <th>Tue</th>
-              <th>Wed</th>
-              <th>Thur</th>
-              <th>Fri</th>
+              <th>Mon<span name='mon'className='delete'>delete</span></th>
+              <th>Tue<span name='tue'className='delete'>delete</span></th>
+              <th>Wed<span name='wed'className='delete'>delete</span></th>
+              <th>Thur<span name='thur'className='delete'>delete</span></th>
+              <th>Fri<span name='fri'className='delete'>delete</span></th>
             </tr>
             <tr>
               <td>
