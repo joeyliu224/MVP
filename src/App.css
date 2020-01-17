@@ -66,8 +66,8 @@ select {
 }
 
 div.todos {
-  background: rgb(233, 118, 65, 0.5);
-  border-left: solid 1px grey;
+  background: rgb(233, 118, 65, 0.2);
+  box-shadow: lightcyan;
 }
 
 .container {
@@ -135,6 +135,7 @@ div.todos {
 }
 
 .delete {
+  margin-right: 3px;
   font-size: 10px;
   font-weight: lighter;
   color: rgb(73, 73, 83);

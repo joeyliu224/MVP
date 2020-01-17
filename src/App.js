@@ -13,12 +13,17 @@ const App = () => {
   const [thur,setthur] = useState({})
   const [fri,setfri] = useState({})
   const [temp,clearTemp] = useState({})
+  //const [del,rec] = useState(false)
   
 
 
-  // useEffect(() => {
-     
-  // }, []);
+  useEffect(() => {
+    setTimeout(function(){
+      if(del) {
+        clearTemp({});
+      }    
+    },4000)
+  },[]);
   let days = [mon,tue,wed,thur,fri];
   let taskTodo = (day) => (<div className='todos'>
     {day.list !== undefined? <div>Todos:</div>:null}
@@ -44,10 +49,6 @@ const App = () => {
     </div>
   )    
 
-  const handleDelete = (e) => {
-    console.log(e.target.name)
-    
-  }
   
 
     return (
@@ -74,11 +75,26 @@ const App = () => {
         <div>
           <table>
             <tr>
-              <th>Mon<span name='mon'className='delete'>delete</span></th>
-              <th>Tue<span name='tue'className='delete'>delete</span></th>
-              <th>Wed<span name='wed'className='delete'>delete</span></th>
-              <th>Thur<span name='thur'className='delete'>delete</span></th>
-              <th>Fri<span name='fri'className='delete'>delete</span></th>
+              <th>Mon
+                <span className='delete' onClick={()=>{clearTemp(mon);setmon({})}}>❌</span>
+                <span className='delete' onClick={()=>{setmon(temp);clearTemp({})}}>R</span>
+              </th>
+              <th>Tue
+                <span className='delete' onClick={()=>{clearTemp(tue);settue({})}}>❌</span>
+                <span className='delete' onClick={()=>{settue(temp);clearTemp({})}}>R</span>
+              </th>
+              <th>Wed
+                <span className='delete' onClick={()=>{clearTemp(wed);setwed({})}}>❌</span>
+                <span className='delete' onClick={()=>{setwed(temp);clearTemp({})}}>R</span>
+              </th>
+              <th>Thur
+                <span className='delete' onClick={()=>{clearTemp(thur);setthur({})}}>❌</span>
+                <span className='delete' onClick={()=>{setthur(temp);clearTemp({})}}>R</span>
+              </th>
+              <th>Fri
+                <span className='delete' onClick={(e)=>{clearTemp(fri);setfri({})}}>❌</span>
+                <span className='delete' onClick={()=>{setfri(temp);clearTemp({})}}>R</span>
+              </th>
             </tr>
             <tr>
               <td>
