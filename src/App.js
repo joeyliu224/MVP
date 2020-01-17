@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
-import {Draggable,Droppable} from 'react-drag-and-drop';
+//import {Draggable,Droppable} from 'react-drag-and-drop';
 import axios from 'axios';
 import PlannerModal from './components/Modal.js';
 
@@ -19,13 +19,29 @@ const App = () => {
 
   useEffect(() => {
     setTimeout(function(){
-      if(del) {
+      if(JSON.stringify(temp)!==JSON.stringify({})) {
         clearTemp({});
       }    
     },4000)
-  },[]);
+  },[temp]);
+
+  const allowDrop = (e) => {
+    e.preventDefault();
+  }
+  const drag = (e,mon) => {
+    e.dataTransfer.setData('text', e.target.id);
+  }
+  const drop = (e,tue) => {
+    e.preventDefault();
+    var data = e.dataTransfer.getData('text');
+    e.target.appendChild(document.getElementById(data));
+    console.log(data)
+    //settue(Object.assign(mon))
+  }
+
   let days = [mon,tue,wed,thur,fri];
-  let taskTodo = (day) => (<div className='todos'>
+  let taskTodo = (day) => (
+    <div className='todos' draggable='true' ondragstart={(e)=>drag(e,mon)} id='todo'>
     {day.list !== undefined? <div>Todos:</div>:null}
     {day.list !==undefined? day.list.map(l=> {
       return (
@@ -41,7 +57,7 @@ const App = () => {
     <div className='laundry'>
       {day.laundry !== undefined ? 
         <div>
-          <img src=''/>
+          <div>🧺Laundry</div>
           <div>@{day.laundry}</div>
         </div>
         :null
@@ -76,32 +92,32 @@ const App = () => {
           <table>
             <tr>
               <th>Mon
-                <span className='delete' onClick={()=>{clearTemp(mon);setmon({})}}>❌</span>
+                <span className='delete' onClick={()=>{clearTemp(mon);setmon({})}}>🗑</span>
                 <span className='delete' onClick={()=>{setmon(temp);clearTemp({})}}>R</span>
               </th>
               <th>Tue
-                <span className='delete' onClick={()=>{clearTemp(tue);settue({})}}>❌</span>
+                <span className='delete' onClick={()=>{clearTemp(tue);settue({})}}>🗑</span>
                 <span className='delete' onClick={()=>{settue(temp);clearTemp({})}}>R</span>
               </th>
               <th>Wed
-                <span className='delete' onClick={()=>{clearTemp(wed);setwed({})}}>❌</span>
+                <span className='delete' onClick={()=>{clearTemp(wed);setwed({})}}>🗑</span>
                 <span className='delete' onClick={()=>{setwed(temp);clearTemp({})}}>R</span>
               </th>
               <th>Thur
-                <span className='delete' onClick={()=>{clearTemp(thur);setthur({})}}>❌</span>
+                <span className='delete' onClick={()=>{clearTemp(thur);setthur({})}}>🗑</span>
                 <span className='delete' onClick={()=>{setthur(temp);clearTemp({})}}>R</span>
               </th>
               <th>Fri
-                <span className='delete' onClick={(e)=>{clearTemp(fri);setfri({})}}>❌</span>
+                <span className='delete' onClick={(e)=>{clearTemp(fri);setfri({})}}>🗑</span>
                 <span className='delete' onClick={()=>{setfri(temp);clearTemp({})}}>R</span>
               </th>
             </tr>
             <tr>
               <td>
-                {taskTodo(days[0])}
-                {taskLaundry(days[0])}
+                {taskTodo(mon)}
+                {taskLaundry(mon)}
               </td>
-              <td>
+              <td id='tue' ondrop={(e)=>drop(e,tue)} ondargover={(e)=>allowDrop(e)}>
                 {taskTodo(days[1])}
                 {taskLaundry(days[1])}
               </td>
