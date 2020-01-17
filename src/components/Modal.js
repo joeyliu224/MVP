@@ -10,6 +10,19 @@ const PlannerModal = (props) => {
   const [content,setContent] = useState('');
   const [modalIsOpen, toggleModal] = useState(true);
   const [time,setTime] = useState('');
+  const [name,setName] = useState('');
+  const [reminder,setReminder] = useState('');
+
+  const customStyles = {
+    content: {
+      top: '20%',
+      left: '30%',
+      right: '30%',
+      bottom: '20%',
+      // marginRight: '-50%',
+      //transform: 'translate(-50%, -50%)'
+    }
+  };
 
   const closeModal = (e) => {
     toggleModal(false);
@@ -29,6 +42,8 @@ const PlannerModal = (props) => {
       props[map[day]](Object.assign(props[day],{list:list}))
     } else if (type === 'laundry') {
       props[map[day]](Object.assign(props[day],{laundry:time}))
+    } else if (type === 'dating') {
+      props[map[day]](Object.assign(props[day],{dating:[name,time,reminder]}))
     }
     
     closeModal(e);
@@ -49,11 +64,28 @@ const PlannerModal = (props) => {
             <span onClick={addOne}><button>✔️</button></span>
           </div>
   } else if(type === 'laundry') {
-    edit = <div>
+    edit = <div className='fix'>
            Time:
             @<input
               placeholder='eg: 2pm'
               onChange={e => setTime(e.target.value)}/>
+           </div>
+  } else if(type === 'dating') {
+    edit = <div className='fix'>
+           with:<br/>
+           <input
+              placeholder='eg: Stephanie'
+              onChange={e => setName(e.target.value)}/>
+           <br/>
+           Time:<br/>
+          <input
+              placeholder='eg: 2pm'
+              onChange={e => setTime(e.target.value)}/>
+          <br/>
+           Reminder:<br/>
+           <input
+              placeholder='eg: wash hair'
+              onChange={e => setReminder(e.target.value)}/>
            </div>
   }
 
@@ -63,12 +95,14 @@ const PlannerModal = (props) => {
       onRequestClose = {closeModal}
       contentLabel = 'Add Event Modal'
       ariaHideApp = {false}
+      style={customStyles}
     >
       <select onChange={e=>{setType(e.target.value)}}>
         <option>Select Tasks</option>
         <option value='todo'>Todo</option>
         <option value='shoppingList'>Shopping List</option>
         <option value='laundry'>Laundry</option>
+        <option value='dating'>Dating</option>
       </select>
       <select onChange={e=>{setDay(e.target.value)}}>
         <option>Select A Day</option>
@@ -84,7 +118,7 @@ const PlannerModal = (props) => {
         })}
       </ul>
       {edit}
-      <button onClick={(e)=>{
+      <button className='submit' onClick={(e)=>{
         // e.preventDefault();
         handleSubmit(e)}}>Submit</button>
 

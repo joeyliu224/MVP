@@ -54,23 +54,36 @@ const App = () => {
     }):null}
   </div>)
   let taskLaundry = (day) => (
-    <div className='laundry'>
+    <div className='laundry' draggable='true'>
       {day.laundry !== undefined ? 
         <div>
-          <div>🧺Laundry</div>
-          <div>@{day.laundry}</div>
+          <div className='emoji'>🧺Laundry</div>
+          <div className='subtext'>@{day.laundry}</div>
         </div>
         :null
       }
     </div>
   )    
-
+  let taskDating = (day) => (
+    <div className='dating' draggable='true'>
+      {day.dating !== undefined ? 
+        <div>
+          <div className='emoji'>💘Dating💘</div>
+          <div className='subtext'>with {day.dating[0]}</div>
+          <div className='subtext'>@{day.dating[1]}</div>
+          <div className='reminder'>Reminder:<mark>{day.dating[2]}</mark></div>
+        </div>
+        :null
+      }
+    </div>
+  )    
   
 
     return (
       <div className="App">
         <h1>Weekly Planner</h1>
         <button 
+          className='add'
           onClick={ e => {
             e.preventDefault();
             setClick(true);
@@ -86,6 +99,7 @@ const App = () => {
             setwed={setwed} wed={wed}
             setthur={setthur} thur={thur}
             setfri={setfri} fri={fri}
+            className='modal'
           />
         :null}
         <div>
@@ -116,21 +130,27 @@ const App = () => {
               <td>
                 {taskTodo(mon)}
                 {taskLaundry(mon)}
+                {taskDating(mon)}
               </td>
               <td id='tue' ondrop={(e)=>drop(e,tue)} ondargover={(e)=>allowDrop(e)}>
                 {taskTodo(days[1])}
                 {taskLaundry(days[1])}
+                {taskDating(tue)}
               </td>
               <td>
                 {taskTodo(days[2])}
                 {taskLaundry(days[2])}
+                {taskDating(wed)}
               </td>
               <td>
                 {taskTodo(days[3])}
                 {taskLaundry(days[3])}
+                {taskDating(thur)}
               </td>
               <td>
                 {taskTodo(days[4])}
+                {taskLaundry(fri)}
+                {taskDating(fri)}
               </td>
             </tr>
           </table>  
