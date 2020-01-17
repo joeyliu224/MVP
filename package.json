@@ -18,7 +18,7 @@
     "clean": "rm dist/bundle.js",
     "start-server": "nodemon server/index.js",
     "build-dev": "webpack -d --watch",
-    "start": "node server.js", 
+    "start": "node server/index.js", 
     "heroku-postbuild": "webpack -p",
     "eject": "react-scripts eject"
   },
