@@ -1,12 +1,39 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './App.css';
+import {Draggable,Droppable} from 'react-drag-and-drop';
 import axios from 'axios';
-//import {Draggable,Droppable} from 'react-drag-and-drop';
-import Todo from './components/Todo.js';
 import PlannerModal from './components/Modal.js';
 
 const App = () => {
   const [click,setClick] = useState(false);
+  const [todos,setTodos] = useState([]);
+  const [mon,setmon] = useState({})
+  const [tue,settue] = useState({})
+  const [wed,setwed] = useState({})
+  const [thur,setthur] = useState({})
+  const [fri,setfri] = useState({})
+  
+
+
+  // useEffect(() => {
+     
+  // }, []);
+  let days = [mon,tue,wed,thur,fri];
+  let taskTodo = (day) => (<div className='todos'>
+    {day.list !== undefined? <div>Todos:</div>:null}
+    {day.list !==undefined? day.list.map(l=> {
+      return (
+        <label className='container'>
+          <input type="checkbox"/>
+          <span className='checkmark'></span>
+          {l}
+        </label>
+    )
+    }):null}
+  </div>)    
+
+    
+  
 
     return (
       <div className="App">
@@ -17,9 +44,18 @@ const App = () => {
             setClick(true);
           }
         }>+ Add +</button>
-        {click? (
-          <PlannerModal/>
-        ):null}
+        {click? 
+          <PlannerModal 
+            setClick={setClick}
+            todos={todos}
+            setTodos={setTodos}
+            setmon={setmon} mon={mon}
+            settue={settue} tue={tue}
+            setwed={setwed} wed={wed}
+            setthur={setthur} thur={thur}
+            setfri={setfri} fri={fri}
+          />
+        :null}
         <div>
           <table>
             <tr>
@@ -31,20 +67,26 @@ const App = () => {
             </tr>
             <tr>
               <td>
-                <Todo/>
+                {taskTodo(days[0])}
               </td>
               <td>
-
+                {taskTodo(days[1])}
               </td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>
+                {taskTodo(days[2])}
+              </td>
+              <td>
+                {taskTodo(days[3])}
+              </td>
+              <td>
+                {taskTodo(days[4])}
+              </td>
             </tr>
           </table>  
         </div>
       </div>
     );
-
+    
   
   
   

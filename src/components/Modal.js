@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
 import '../App.css';
+import axios from 'axios';
 
 const PlannerModal = (props) => {
   const [type, setType] = useState('');
@@ -13,10 +14,19 @@ const PlannerModal = (props) => {
     toggleModal(false);
     props.setClick(false);
   }
+  const map = {
+    mon:'setmon',
+    tue:'settue',
+    wed:'setwed',
+    thur:'setthur',
+    fri:'setfri'
+  }
 
-  // const handleInputChange = (e) => {
-
-  // }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props[map[day]](Object.assign(props[day],{list:list}))
+    closeModal(e);
+  }
  const addOne = () => {
   setList(list.concat(content))
  }
@@ -30,7 +40,7 @@ const PlannerModal = (props) => {
                             'things to buy:'
                           }
               onChange={e => setContent(e.target.value)}/>
-            <span onClick={addOne}>+</span>
+            <span onClick={addOne}><button>✔️</button></span>
           </div>
   } else if(type === 'laundry') {
     edit = <div></div>
@@ -41,6 +51,7 @@ const PlannerModal = (props) => {
       isOpen = {modalIsOpen}
       onRequestClose = {closeModal}
       contentLabel = 'Add Event Modal'
+      ariaHideApp = {false}
     >
       <select onChange={e=>{setType(e.target.value)}}>
         <option>Select Tasks</option>
@@ -53,8 +64,8 @@ const PlannerModal = (props) => {
         <option value='mon'>Mon</option>
         <option value='tue'>Tue</option>
         <option value='wed'>Wed</option>
-        <option value='mon'>Thur</option>
-        <option value='tue'>Fri</option>
+        <option value='thur'>Thur</option>
+        <option value='fri'>Fri</option>
       </select>
       <ul>
         {list.map(item => {
@@ -62,7 +73,9 @@ const PlannerModal = (props) => {
         })}
       </ul>
       {edit}
-      <button>Submit</button>
+      <button onClick={(e)=>{
+        // e.preventDefault();
+        handleSubmit(e)}}>Submit</button>
 
 
     </Modal>
